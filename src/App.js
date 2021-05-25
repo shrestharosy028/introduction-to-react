@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import './App.css';
+import ClassComponent from './components/ClassComponent';
+import { FunctionalComponent } from './components/FunctionalComponent';
+import NotFound from './components/NotFound';
+import { routes } from './constants';
+import Character from './pages/character';
+import Main from './pages/main';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className='App'>
+        <nav>
+          <Link to={routes.index}>Characters</Link>
+          <Link to={routes.class}>Class</Link>
+          <Link to={routes.function}>Function</Link>
+        </nav>
+        <Switch>
+          <Route path={routes.index} component={Main} exact />
+          <Route path={routes.character} component={Character} exact />
+          <Route path={routes.class} component={ClassComponent} exact />
+          <Route path={routes.function} component={FunctionalComponent} />
+          <Route component={NotFound} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
